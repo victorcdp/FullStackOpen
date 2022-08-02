@@ -1,62 +1,37 @@
-const Header = (props) => {
-  return (
-    <>
-      <h1>{props.course.name}</h1>
-    </>
-  )
-}
+import {useState} from 'react'
 
-const Content = (props) => {
-  return (
-    <>
-      <Part part={props.parts[0]} />
-      <Part part={props.parts[1]} />
-      <Part part={props.parts[2]} />
-    </>
-  )
-}
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
 
-const Part = (props) => {
-  return (
-    <>
-      <p>{props.part.name} {props.part.exercises}</p>
-    </>
-  )
-}
-
-const Total = (props) => {
-  return (
-    <>
-      <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
-    </>
-  )
-}
+const Statistics = ({ text, value }) => (
+  <div>
+    {text} {value}
+  </div>
+)
 
 const App = () => {
-  const course = {
-    name: 'Half Stack pplication development',
-    parts:  [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
-  }
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  const incrementGood = () => setGood(good + 1)
+  const incrementNeutral = () => setNeutral(neutral + 1)
+  const incrementBad = () => setBad(bad + 1)
 
   return (
     <div>
-      <Header course={course} />
-      <Content parts={course.parts}/>
-      <Total parts={course.parts}/>
-    </div>
+      <h1>give feedback</h1>
+      <Button handleClick={incrementGood} text="good" />
+      <Button handleClick={incrementNeutral} text="neutral" />
+      <Button handleClick={incrementBad} text="bad" />
+      <h1>statistics</h1>
+      <Statistics text="good" value={good} />
+      <Statistics text="neutral" value={neutral} />
+      <Statistics text="bad" value={bad} />
+</div>
   )
 }
 
