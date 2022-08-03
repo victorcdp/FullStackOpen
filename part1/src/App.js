@@ -6,28 +6,37 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
-const Statistics = ({ value }) => (
-  <div>
+const Statistics = ({ value }) => {
+  if (value.total === 0) {
+    return (
+      <div>
+        No feedback given
+      </div>
+    )
+  }
+  return (
     <div>
-      good {value.good}
+      <div>
+        good {value.good}
+      </div>
+      <div>
+        neutral {value.neutral}
+      </div>
+      <div>
+        bad {value.bad}
+      </div>
+      <div>
+        all {value.total}
+      </div>
+      <div>
+        average {(value.good + value.bad * -1) / value.total}
+      </div>
+      <div>
+        positive {(value.good / value.total) * 100} %
+      </div>
     </div>
-    <div>
-      neutral {value.neutral}
-    </div>
-    <div>
-      bad {value.bad}
-    </div>
-    <div>
-      all {value.total}
-    </div>
-    <div>
-      average {(value.good + value.bad * -1) / value.total}
-    </div>
-    <div>
-      positive {(value.good / value.total) * 100} %
-    </div>
-  </div>
-)
+  )
+}
 
 const App = () => {
   const [clicks, setClicks] = useState({
