@@ -7,12 +7,13 @@ const Header = (props) => {
 }
 
 const Content = ({ parts }) => {
+  const total = parts.reduce((total, part) => total + part.exercises, 0)
   return (
     <div>
       {parts.map(part => 
         <Part key={part.id} part={part} />
       )}
-      {/* <p>Number of exercises {parts[0].exercises + parts[1].exercises + parts[2].exercises}</p> */}
+      <p>Number of exercises {total}</p>
     </div>
   )
 }
