@@ -16,16 +16,32 @@ const App = () => {
     setNewName(event.target.value)
   }
 
+  const isRepeated = () => {
+    const iterator = persons.values()
+
+    for (const person of iterator) {
+      if(person.name === newName){
+        return true;
+      }
+    }
+    return false;
+  }
+
   const addName = (event) => {
     event.preventDefault()
-    const nameObject = {
-      name: newName,
-      date: new Date().toISOString(),
-      id: persons.length + 1
+    if(isRepeated()){
+      alert(`${newName} is already added to phonebook`)
     }
+    else{
+      const nameObject = {
+        name: newName,
+        date: new Date().toISOString(),
+        id: persons.length + 1
+      }
 
-    setPersons(persons.concat(nameObject))
-    setNewName('')
+      setPersons(persons.concat(nameObject))
+      setNewName('')
+    }
   }
 
   return (
